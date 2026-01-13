@@ -7,7 +7,7 @@ const ROOT_DIR = process.cwd();
 const JSON_POST_FILE_PATH = resolve(ROOT_DIR, 'src', 'app', 'db', 'seed', 'posts.json');
 
 export class JsonPostRepository implements PostRepository {
-  private async readFromDisk() {
+  private async readFromDisk(): Promise<PostModel[]> {
     const fileContent = await fs.readFile(JSON_POST_FILE_PATH, 'utf8');
     return JSON.parse(fileContent).posts;
   }
@@ -44,8 +44,6 @@ export class JsonPostRepository implements PostRepository {
     await fs.writeFile(JSON_POST_FILE_PATH, JSON.stringify({ posts: filteredPosts }, null, 2));
   }
 }
-
-export const jsonPostRepository: PostRepository = new JsonPostRepository();
 
 // (async () => {
 //   const posts = await jsonPostRepository.findById('be3f14a1-0105-4e2e-bfc9-133a05e7bda60');
