@@ -5,6 +5,7 @@ import Container from "@components/Container";
 import Header from "@/components/Header";
 import Link from "next/link";
 import Image from "next/image";
+import PostHeading from "@/components/PostHeading";
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
             priority
           />
         </Link>
-        <div className="flex flex-col sm:justify-center">
+        <div className="flex flex-col gap-3 sm:justify-center">
           <time
             dateTime="2026-04-03"
             className="text-slate-600 text-sm/tight block"
@@ -33,9 +34,8 @@ export default function Home() {
             2026/04/03 10:00
           </time>
 
-          <h1 className="text-2xl/tight font-extrabold mb-4 sm:text-4xl/tight">
-            <Link href="#">Rotina matinal de pessoas altamente eficazes</Link>
-          </h1>
+          <PostHeading url="#" as="h1">Rotina matinal de pessoas altamente eficazes</PostHeading>
+
           <p className="text-foreground/80">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quibusdam consequuntur iste,
             explicabo officiis id, quaerat dicta perspiciatis minima et sapiente voluptas neque
