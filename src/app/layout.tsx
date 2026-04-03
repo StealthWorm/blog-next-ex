@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-import { THEME_LS_KEY } from "@/lib/theme";
+import ThemeHydration from "@/components/ThemeHydration";
+import { THEME_LS_KEY } from "@/lib/theme-constants";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,16 +16,17 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-/** Anti-FOUC: mesma ideia do exemplo “spaghetti.js” na documentação do Tailwind. */
-const themeBoot = `(function(){try{var t=localStorage.getItem('${THEME_LS_KEY}');var d=t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
+/** Roda no parse do HTML (antes do React). Mesma lógica que `applyThemeClass` / Tailwind `html.dark`. */
+const themeBootScript = `(function(){try{var k='${THEME_LS_KEY}';var t=localStorage.getItem(k);var dark=t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`;
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body>
-        <Script id="theme-boot" strategy="beforeInteractive">
-          {themeBoot}
-        </Script>
+        <ThemeHydration />
         {children}
       </body>
     </html>
