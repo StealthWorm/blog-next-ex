@@ -3,9 +3,8 @@ import PostsList from "@components/PostsList";
 import { Suspense } from "react";
 import Container from "@components/Container";
 import Header from "@/components/Header";
-import Link from "next/link";
-import Image from "next/image";
 import PostHeading from "@/components/PostHeading";
+import PostCover from "@/components/PostCover";
 
 export default function Home() {
   return (
@@ -13,19 +12,17 @@ export default function Home() {
       <Header title="The Blog" />
 
       <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group">
-        <Link
-          href="#"
-          className="h-full w-full overflow-hidden rounded-xl"
-        >
-          <Image
-            src="/images/bryen_0.png"
-            alt="Blog"
-            width={1200}
-            height={720}
-            className="w-full h-full object-cover object-center group-hover:opacity-80 group-hover:scale-105 transition-all"
-            priority
-          />
-        </Link>
+        <PostCover
+          linkProps={{ href: "#" }}
+          imgProps={{
+            src: "/images/bryen_1.png",
+            alt: "Blog",
+            width: 1200,
+            height: 720,
+            priority: true,
+          }}
+        />
+
         <div className="flex flex-col gap-3 sm:justify-center">
           <time
             dateTime="2026-04-03"
