@@ -44,8 +44,3 @@ export class JsonPostRepository implements PostRepository {
     await fs.writeFile(JSON_POST_FILE_PATH, JSON.stringify({ posts: filteredPosts }, null, 2));
   }
 }
-
-// (async () => {
-//   const posts = await jsonPostRepository.findById('be3f14a1-0105-4e2e-bfc9-133a05e7bda60');
-//   console.log(posts);
-// })();
