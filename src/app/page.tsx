@@ -31,7 +31,9 @@ export default function Home() {
             2026/04/03 10:00
           </time>
 
-          <PostHeading url="#" as="h1">Rotina matinal de pessoas altamente eficazes</PostHeading>
+          <PostHeading url="#" as="h1" className="text-slate-400">
+            Rotina matinal de pessoas altamente eficazes
+          </PostHeading>
 
           <p className="text-foreground/80">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quibusdam consequuntur iste,
