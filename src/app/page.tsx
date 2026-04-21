@@ -3,7 +3,7 @@ import PostsList from "@components/PostsList";
 import { Suspense } from "react";
 import Container from "@components/Container";
 import Header from "@/components/Header";
-import PostFeatured from "@/components/PostFeatured";
+import { PostFeatured } from "@/components/PostFeatured";
 
 export default function Home() {
   return (

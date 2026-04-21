@@ -1,8 +1,7 @@
 import { PostModel } from '@/models/post/post-model';
 import PostCover from '@/components/PostCover';
 import { jsonPostRepository } from '@repositories/post';
-import PostHeading from '@/components/PostHeading';
-import { formatDatetime, formatDistanceToNow } from '@/utils/format-datetime';
+import { PostSummary } from '@/components/PostSummary';
 
 export default async function PostsList() {
 
@@ -23,19 +22,13 @@ export default async function PostsList() {
                 priority: true,
               }}
             />
-            <div className="flex flex-col gap-3 sm:justify-center">
-              <time
-                dateTime={post.createdAt}
-                className="text-slate-600 text-sm/tight block"
-                title={formatDistanceToNow(post.createdAt)}
-              >
-                {formatDatetime(post.createdAt)}
-              </time>
-              <PostHeading url={postLink} as="h2">
-                {post.title}
-              </PostHeading>
-              <p className="text-foreground/80">{post.excerpt}</p>
-            </div>
+            <PostSummary
+              postHeading="h2"
+              postLink={postLink}
+              createdAt={post.createdAt}
+              title={post.title}
+              excerpt={post.excerpt}
+            />
           </div>
         );
       })}
