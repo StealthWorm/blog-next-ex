@@ -2,6 +2,7 @@ import { PostModel } from '@/models/post/post-model';
 import PostCover from '@/components/PostCover';
 import { jsonPostRepository } from '@repositories/post';
 import PostHeading from '@/components/PostHeading';
+import { formatDatetime, formatDistanceToNow } from '@/utils/format-datetime';
 
 export default async function PostsList() {
 
@@ -26,14 +27,9 @@ export default async function PostsList() {
               <time
                 dateTime={post.createdAt}
                 className="text-slate-600 text-sm/tight block"
+                title={formatDistanceToNow(post.createdAt)}
               >
-                {new Date(post.createdAt).toLocaleDateString('pt-BR', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {formatDatetime(post.createdAt)}
               </time>
               <PostHeading url={postLink} as="h2">
                 {post.title}
