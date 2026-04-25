@@ -3,6 +3,7 @@ import { THEME_LS_KEY } from "@/lib/theme-constants";
 import ThemeHydration from "@/components/ThemeHydration";
 import Container from '@/components/Container';
 import Header from '@/components/Header';
+import { Footer } from '@/components/Footer';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -37,9 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           {children}
 
-          <footer>
-            <p className='text-6xl font-bold text-center py-8'>Footer</p>
-          </footer>
+          <Footer />
         </Container>
       </body>
     </html>

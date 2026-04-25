@@ -6,7 +6,7 @@ type HeaderProps = {
   title: string;
   className?: string;
 }
-export default function Header({ title = "Posts", className = "" }: HeaderProps) {
+export default function Header({ title = "The Blog", className = "" }: HeaderProps) {
   return (
     <header className="flex gap-3 justify-between items-center">
       <h1 className={cn(
