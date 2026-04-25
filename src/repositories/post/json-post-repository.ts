@@ -12,24 +12,24 @@ export class JsonPostRepository implements PostRepository {
     return JSON.parse(fileContent).posts;
   }
 
-  async findAll(): Promise<PostModel[]> {
+  async findAllPublic(): Promise<PostModel[]> {
     const posts = await this.readFromDisk();
-    return posts;
+    return posts.filter(post => post.published);
   }
 
   async findById(id: string): Promise<PostModel | null> {
-    const posts = await this.findAll();
+    const posts = await this.findAllPublic();
     return posts.find(post => post.id === id) || null;
   }
 
   async create(post: PostModel): Promise<PostModel> {
-    const posts = await this.findAll();
+    const posts = await this.findAllPublic();
     posts.push(post);
     return post;
   }
 
   async update(post: PostModel): Promise<PostModel> {
-    const posts = await this.findAll();
+    const posts = await this.findAllPublic();
     const index = posts.findIndex(p => p.id === post.id);
     if (index === -1) {
       throw new Error('Post not found');
@@ -39,7 +39,7 @@ export class JsonPostRepository implements PostRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const posts = await this.findAll();
+    const posts = await this.findAllPublic();
     const filteredPosts = posts.filter(post => post.id !== id);
     await fs.writeFile(JSON_POST_FILE_PATH, JSON.stringify({ posts: filteredPosts }, null, 2));
   }
