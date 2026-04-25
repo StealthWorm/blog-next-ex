@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import ThemeHydration from "@/components/ThemeHydration";
 import { THEME_LS_KEY } from "@/lib/theme-constants";
+import ThemeHydration from "@/components/ThemeHydration";
+import Container from '@/components/Container';
+import Header from '@/components/Header';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: {
+    default: 'The Blog - Este é um blog com Next.js', // título padrão
+    template: '%s | The Blog', // %s é substituído pelo título da página
+  },
   description: "Blog de notícias",
 };
 
@@ -27,7 +32,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body>
         <ThemeHydration />
-        {children}
+        <Container>
+          <Header title="The Blog - Posts" />
+
+          {children}
+
+          <footer>
+            <p className='text-6xl font-bold text-center py-8'>Footer</p>
+          </footer>
+        </Container>
       </body>
     </html>
   );
