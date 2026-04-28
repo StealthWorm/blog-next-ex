@@ -1,10 +1,10 @@
-import { findAllPublicPosts } from '@/lib/post/queries';
+import { findAllPublicPostsCached } from '@/lib/post/queries';
 import { PostModel } from '@/models/post/post-model';
 import PostCover from '@/components/PostCover';
 import { PostSummary } from '@/components/PostSummary';
 
 export default async function PostsList() {
-  const posts = await findAllPublicPosts();
+  const posts = await findAllPublicPostsCached();
 
   return (
     <div className="grid grid-cols-1 mb-16 gap-8 sm:grid-cols-2 md:grid-cols-3">

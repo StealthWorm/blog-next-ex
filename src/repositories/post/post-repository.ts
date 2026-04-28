@@ -6,4 +6,5 @@ export interface PostRepository {
   create(post: PostModel): Promise<PostModel>;
   update(post: PostModel): Promise<PostModel>;
   delete(id: string): Promise<void>;
+  findBySlug(slug: string): Promise<PostModel>;
 }
