@@ -44,12 +44,8 @@ export class JsonPostRepository implements PostRepository {
     await fs.writeFile(JSON_POST_FILE_PATH, JSON.stringify({ posts: filteredPosts }, null, 2));
   }
 
-  async findBySlug(slug: string): Promise<PostModel> {
+  async findBySlug(slug: string): Promise<PostModel | null> {
     const posts = await this.findAllPublic();
-    const post = posts.find(post => post.slug === slug);
-
-    if (!post) throw new Error('Post not found for given slug');
-
-    return post;
+    return posts.find(post => post.slug === slug) ?? null;
   }
 }

@@ -7,14 +7,14 @@ export const findAllPublicPostsCached = cache(
   async () => await jsonPostRepository.findAllPublic(),
 );
 
-export const findPostBySlugCached = cache(
-  async (slug: string) => await jsonPostRepository.findBySlug(slug),
-);
+export const findPostBySlugCached = cache(async (slug: string) => {
+  const post = await jsonPostRepository.findBySlug(slug);
+  if (!post) notFound();
+  return post;
+});
 
 export const findPostByIdCached = cache(async (slug: string) => {
-  const post = await jsonPostRepository.findBySlug(slug).catch(() => undefined);
-
+  const post = await jsonPostRepository.findBySlug(slug);
   if (!post) notFound();
-
   return post;
 });
