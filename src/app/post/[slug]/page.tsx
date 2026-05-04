@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: PostSlugPageProps): Promise<M
   };
 }
 
+// Gera os parâmetros estáticos para cada post
 export async function generateStaticParams() {
   const posts = await findAllPublicPostsCached();
   const params = posts.map((post) => ({
