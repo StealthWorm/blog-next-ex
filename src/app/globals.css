@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 /* Documentação Tailwind: dark:* por seletor, não só por prefers-color-scheme */
 @custom-variant dark (&:where(html.dark, html.dark *));

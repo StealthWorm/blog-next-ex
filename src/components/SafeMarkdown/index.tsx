@@ -1,3 +1,4 @@
+import { cn } from '@sglara/cn';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
@@ -8,7 +9,20 @@ type SafeMarkdownProps = {
 
 export function SafeMarkdown({ markdown }: SafeMarkdownProps) {
   return (
-    <div>
+    <div
+      className={cn(
+        'prose prose-slate dark:prose-invert',
+        'w-full max-w-none',
+        'overflow-hidden',
+        'prose-a:transition',
+        'prose-a:no-underline',
+        'prose-a:text-blue-600 prose-a:hover:text-blue-800',
+        'dark:prose-a:text-blue-400 dark:prose-a:hover:text-blue-300',
+        'prose-a:hover:underline',
+        'prose-img:mx-auto',
+        'lg:prose-lg',
+      )}
+    >
       <ReactMarkdown
         rehypePlugins={[rehypeSanitize]}
         remarkPlugins={[remarkGfm]}
