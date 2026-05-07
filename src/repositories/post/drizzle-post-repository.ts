@@ -12,19 +12,30 @@ export class DrizzlePostRepository implements PostRepository {
     return posts;
   }
 
-  async findBySlugPublic(slug: string): Promise<PostModel | null> {
+  async findBySlugPublic(slug: string): Promise<PostModel> {
     const post = await drizzleDb.query.posts.findFirst({
-      where: (posts, { eq }) => eq(posts.slug, slug),
-    }) ?? null;
+      where: (posts, { eq, and }) => and(eq(posts.slug, slug), eq(posts.published, true)),
+    });
+
+    if (!post) throw new Error('Post não encontrado para slug');
 
     return post;
   }
 
-  findAll(): Promise<PostModel[]> {
-    throw new Error('Method not implemented.');
+  async findAll(): Promise<PostModel[]> {
+    const posts = await drizzleDb.query.posts.findMany({
+      orderBy: (posts, { desc }) => desc(posts.createdAt),
+    });
+    return posts;
   }
-  findById(id: string): Promise<PostModel | null> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<PostModel | null> {
+    const post = await drizzleDb.query.posts.findFirst({
+      where: (posts, { eq }) => eq(posts.id, id),
+    });
+
+    if (!post) throw new Error('Post não encontrado para id');
+
+    return post;
   }
   create(post: PostModel): Promise<PostModel> {
     throw new Error('Method not implemented.');
@@ -37,9 +48,9 @@ export class DrizzlePostRepository implements PostRepository {
   }
 }
 
-(async () => {
-  const repo = new DrizzlePostRepository();
-  const posts = await repo.findAllPublic();
+// (async () => {
+//   const repo = new DrizzlePostRepository();
+//   const posts = await repo.findAllPublic();
 
-  posts.forEach(post => console.log(post.slug, post.published));
-})();
+//   posts.forEach(post => console.log(post.slug, post.published));
+// })();

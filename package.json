@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx src/app/db/drizzle/seed.ts",
+    "db:reset": "npm run db:migrate && npm run db:seed"
   },
   "dependencies": {
     "@sglara/cn": "^1.0.0",

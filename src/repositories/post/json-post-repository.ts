@@ -7,9 +7,6 @@ const ROOT_DIR = process.cwd();
 const JSON_POST_FILE_PATH = resolve(ROOT_DIR, 'src', 'app', 'db', 'seed', 'posts.json');
 
 export class JsonPostRepository implements PostRepository {
-  findBySlug(slug: string): Promise<PostModel | null> {
-    throw new Error("Method not implemented.");
-  }
   private async readFromDisk(): Promise<PostModel[]> {
     const fileContent = await fs.readFile(JSON_POST_FILE_PATH, 'utf8');
     return JSON.parse(fileContent).posts;
@@ -19,7 +16,6 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.readFromDisk();
     return posts.filter(post => post.published);
   }
-
 
   async findAll(): Promise<PostModel[]> {
     const posts = await this.readFromDisk();
