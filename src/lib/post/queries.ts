@@ -1,16 +1,26 @@
 import { postRepository } from '@/repositories/post';
 import { notFound } from 'next/navigation';
-import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 
-// Cache the query to avoid re-fetching the data on every render
-export const findAllPublicPostsCached = cache(
-  async () => await postRepository.findAllPublic(),
+// Do not wrap the callback in React `cache()` — it runs inside Next's
+// workUnitAsyncStorage for unstable_cache and can yield undefined / bad cache
+// entries when combined with incremental cache + tags.
+export const findAllPublicPostsCached = unstable_cache(
+  async () => postRepository.findAllPublic(),
+  ['posts'],
+  { tags: ['posts'] }
 );
 
-export const findPostBySlugCached = cache(async (slug: string) => {
-  const post = await postRepository
-    .findBySlugPublic(slug)
-    .catch(() => undefined);
-  if (!post) notFound();
-  return post;
-});
+export const findPostBySlugCached = unstable_cache(
+  async (slug: string) => {
+    const post = await postRepository
+      .findBySlugPublic(slug)
+      .catch(() => undefined);
+
+    if (!post) notFound();
+
+    return post;
+  },
+  ['post-by-slug'],
+  { tags: ['posts'] }
+);
