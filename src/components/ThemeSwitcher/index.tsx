@@ -51,7 +51,7 @@ export default function ThemeSwitcher() {
 
   return (
     <div
-      className="flex flex-wrap h-fit items-center justify-center gap-1 rounded-lg border border-foreground/15 bg-foreground/5 p-1 text-xs sm:text-sm"
+      className="absolute top-4 right-4 flex-wrap h-fit items-center justify-center gap-1 rounded-lg border border-foreground/15 bg-foreground/5 p-1 text-xs sm:text-sm"
       role="group"
       aria-label="Tema da interface"
     >

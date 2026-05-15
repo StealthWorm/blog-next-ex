@@ -1,6 +1,6 @@
-import { postRepository } from '@/repositories/post';
-import { notFound } from 'next/navigation';
-import { unstable_cache } from 'next/cache';
+import { unstable_cache } from "next/cache";
+import { postRepository } from "@/repositories/post";
+import { notFound } from "next/navigation";
 
 // Do not wrap the callback in React `cache()` — it runs inside Next's
 // workUnitAsyncStorage for unstable_cache and can yield undefined / bad cache
@@ -11,7 +11,7 @@ export const findAllPublicPostsCached = unstable_cache(
   { tags: ['posts'] }
 );
 
-export const findPostBySlugCached = unstable_cache(
+export const findPublicPostBySlugCached = unstable_cache(
   async (slug: string) => {
     const post = await postRepository
       .findBySlugPublic(slug)

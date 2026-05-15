@@ -1,4 +1,4 @@
-import { findAllPublicPostsCached } from '@/lib/post/queries';
+import { findAllPublicPostsCached } from '@/lib/post/queries/public';
 import { PostModel } from '@/models/post/post-model';
 import PostCover from '@/components/PostCover';
 import { PostSummary } from '@/components/PostSummary';
